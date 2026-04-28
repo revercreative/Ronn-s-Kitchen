@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ronn's Kitchen × Rêver Creative</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #061313;
+      --chartreuse: #D7CF2E;
+      --white: #FFFFFF;
+      --off-white: #f5f5f0;
+      --muted: rgba(255,255,255,0.45);
+      --border: rgba(255,255,255,0.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(6,19,19,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--chartreuse); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0 3rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(215,207,46,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(215,207,46,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--chartreuse);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.75rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.4s;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--chartreuse);
+    }
+
+    .hero-sub {
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      max-width: 420px;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.6s;
+    }
+
+    .hero-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--chartreuse);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-number {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--chartreuse);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 3rem;
+    }
+
+    /* ── WELCOME ── */
+    .welcome-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .welcome-body p {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 1.25rem;
+      max-width: 520px;
+    }
+
+    .welcome-body .signature {
+      margin-top: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--white);
+    }
+
+    .meta-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2rem;
+    }
+
+    .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.85rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+
+    .meta-row:last-child { border-bottom: none; }
+
+    .meta-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .meta-value {
+      font-size: 0.85rem;
+      color: var(--white);
+      text-align: right;
+    }
+
+    .meta-value a {
+      color: var(--chartreuse);
+      text-decoration: none;
+    }
+
+    /* ── SCOPE TABLE ── */
+    .scope-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .scope-table th {
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      padding: 0 1rem 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .scope-table td {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.8);
+      padding: 1.25rem 1rem 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      line-height: 1.6;
+    }
+
+    .scope-table td:first-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--white);
+      white-space: nowrap;
+      padding-right: 2.5rem;
+      width: 200px;
+    }
+
+    /* ── DELIVERABLES ── */
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .deliverable-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s;
+    }
+
+    .deliverable-card:hover { border-color: rgba(215,207,46,0.3); }
+
+    .deliverable-card.complete {
+      border-color: rgba(215,207,46,0.25);
+    }
+
+    .deliverable-card.complete::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--chartreuse);
+    }
+
+    .card-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+
+    .status-dot.active {
+      background: var(--chartreuse);
+      box-shadow: 0 0 6px rgba(215,207,46,0.6);
+    }
+
+    .status-text { color: var(--muted); }
+    .status-text.active-text { color: var(--chartreuse); }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      color: var(--white);
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .footer-link {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--chartreuse);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 800px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { padding: 0 1.5rem 4rem; }
+      section { padding: 4rem 1.5rem; }
+      .welcome-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .deliverables-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Rêver Creative</a>
+    <ul class="nav-links">
+      <li><a href="#welcome">Welcome</a></li>
+      <li><a href="#scope">Scope</a></li>
+      <li><a href="#deliverables">Deliverables</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <p class="hero-label">Client Portal · Rêver Creative</p>
+    <h1 class="hero-title">Ronn's <em>Kitchen</em></h1>
+    <p class="hero-sub">Your dedicated project space. Everything related to your engagement lives here.</p>
+    <div class="hero-bar"></div>
+  </section>
+
+  <!-- WELCOME -->
+  <section id="welcome">
+    <p class="section-number">01 — Welcome</p>
+    <h2 class="section-title">Welcome, Priscilla.</h2>
+    <div class="welcome-grid">
+      <div class="welcome-body">
+        <p>Every great brand starts with a mark that means something. Rêver Creative is honored to craft the visual foundation for Ronn's Kitchen, a logo that communicates your brand's essence with clarity and distinction.</p>
+        <p>What we're building together is intentional, refined, and built to last. This portal is your single source of truth throughout our engagement. Every deliverable, every update, every next step lives here, so you always know exactly where things stand.</p>
+        <p class="signature">With intention,<br><strong>Jasmine &amp; Ibi · Rêver Creative</strong></p>
+      </div>
+      <div class="meta-card">
+        <div class="meta-row">
+          <span class="meta-label">Client</span>
+          <span class="meta-value">Priscilla Deratus</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Brand</span>
+          <span class="meta-value">Ronn's Kitchen</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Engagement</span>
+          <span class="meta-value">Logo Design</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Start Date</span>
+          <span class="meta-value">April 28, 2026</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Delivery</span>
+          <span class="meta-value">May 8, 2026</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Retainer</span>
+          <span class="meta-value" style="color: var(--chartreuse);">Received ✓</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Partner</span>
+          <span class="meta-value">Rêver Creative, LLC</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Website</span>
+          <span class="meta-value"><a href="https://revercrt.com" target="_blank">revercrt.com</a></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCOPE -->
+  <section id="scope">
+    <p class="section-number">02 — Project Scope</p>
+    <h2 class="section-title">The Work.</h2>
+    <table class="scope-table">
+      <thead>
+        <tr>
+          <th>Deliverable</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Logo Concepts</td>
+          <td>2 initial logo concepts for review and selection.</td>
+        </tr>
+        <tr>
+          <td>Revisions</td>
+          <td>1 round of revisions on the selected concept.</td>
+        </tr>
+        <tr>
+          <td>Final Logo Suite</td>
+          <td>Primary, secondary, and submark. Delivered in full color, black, and white. File formats: PNG, JPG, EPS.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- DELIVERABLES -->
+  <section id="deliverables">
+    <p class="section-number">03 — Deliverables</p>
+    <h2 class="section-title">Where We Are.</h2>
+    <div class="deliverables-grid">
+
+      <div class="deliverable-card">
+        <div class="card-status">
+          <span class="status-dot"></span>
+          <span class="status-text">Upcoming</span>
+        </div>
+        <p class="card-title">Logo Concepts</p>
+        <p class="card-desc">2 initial logo concepts for review and selection.</p>
+      </div>
+
+      <div class="deliverable-card">
+        <div class="card-status">
+          <span class="status-dot"></span>
+          <span class="status-text">Upcoming</span>
+        </div>
+        <p class="card-title">Revisions</p>
+        <p class="card-desc">1 round of revisions on the selected concept.</p>
+      </div>
+
+      <div class="deliverable-card">
+        <div class="card-status">
+          <span class="status-dot"></span>
+          <span class="status-text">Upcoming</span>
+        </div>
+        <p class="card-title">Final Logo Suite</p>
+        <p class="card-desc">Primary, secondary, and submark. Full color, black, and white. PNG, JPG, EPS.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">Rêver Creative</span>
+    <a href="https://revercrt.com" target="_blank" class="footer-link">revercrt.com</a>
+  </footer>
+
+</body>
+</html>
